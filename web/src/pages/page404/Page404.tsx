@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
+import './_page404.scss';
 
 const Page404: React.FC = () => {
   return (<div className="page-404">

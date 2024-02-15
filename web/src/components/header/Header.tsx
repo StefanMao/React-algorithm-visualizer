@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import PathConstants from '../routes/pathConstants';
+import PathConstants from '../../routes/pathConstants';
+import './_header.scss';
 
 const Header: React.FC = () => {
   return (

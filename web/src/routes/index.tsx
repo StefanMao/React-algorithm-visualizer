@@ -1,10 +1,10 @@
 import type { RouteObject } from 'react-router-dom';
 
-import { PathConstants } from './pathConstants';
-import { Home } from './lazyComponent';
+import pathConstants  from '@/routes/pathConstants';
+import Home from './lazyComponent';
 
 const routes: RouteObject[] = [
-  { path: PathConstants.HOME, element: <Home /> },
+  { path: pathConstants.HOME, element: <Home /> },
 ];
 
 export default routes;

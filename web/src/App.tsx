@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import routes from './routes';
 
-import Layout from '@/components/Layout';
-import Page404 from '@/pages/Page404';
+import Layout from '@/components/layout/Layout';
+import Page404 from '@/pages/page404/Page404';
 import './App.css';
 
 function App() {
