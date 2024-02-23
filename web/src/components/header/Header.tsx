@@ -1,31 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Divider } from '@mui/material';
 
+import { HeaderContainer, LogoContainer } from './headerStyle';
 import PathConstants from '../../routes/pathConstants';
-import './_header.scss';
 
 const Header: React.FC = () => {
   return (
-    <header>
-      <div className="header-div">
-        <h1 className="title">
-          <Link to={PathConstants.HOME}>My React App</Link>
-        </h1>
-        <nav className="navbar">
-          <ul className="nav-list">
-            <li className="nav-item">
-              <Link to={PathConstants.TEAM}>Team</Link>
-            </li>
-            <li className="nav-item">
-              <Link to={PathConstants.PORTFOLIO}>Portfolio</Link>
-            </li>
-            <li className="nav-item">
-              <Link to={PathConstants.ABOUT}>About</Link>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
+    <HeaderContainer>
+      <LogoContainer>
+        <h3>
+          <Link to={PathConstants.HOME}>泰時刻</Link>
+        </h3>
+        <Divider sx={{ mr: 4 }}></Divider>
+        <h3>
+          <Link to={PathConstants.LETTER_MATCH_GAME}>泰文連連看</Link>
+        </h3>
+      </LogoContainer>
+    </HeaderContainer>
   );
 };
 

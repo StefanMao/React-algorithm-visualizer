@@ -1,14 +1,12 @@
 import React from 'react';
 
-import './_footer.scss';
+import { FooterContainer } from './footerStyles';
 
 const Footer: React.FC = () => {
   return (
-    <footer>
-      <div className="footer-div">
-        <p className="copyright">© {new Date().getFullYear()} My React App. All rights reserved.</p>
-      </div>
-    </footer>
+    <FooterContainer>
+      <p>© {new Date().getFullYear()} My React App. All rights reserved.</p>
+    </FooterContainer>
   );
 };
 

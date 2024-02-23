@@ -1,5 +1,4 @@
 import { lazy } from 'react';
 
-const Home = lazy(() => import('../pages/Home'));
-
-export default Home;
+export const Home = lazy(() => import('../pages/home/Home'));
+export const LetterMatchGame = lazy(() => import('../pages/letterMatchGame/LetterMatchGame'));
