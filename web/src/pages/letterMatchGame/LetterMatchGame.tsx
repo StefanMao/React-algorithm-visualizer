@@ -1,14 +1,21 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 
-import { LetterMatchGameContainer } from './letterMatchGameStyle';
+import WordCard from "@/common/wordCard/WordCard";
+
+import { LetterMatchGameContainer, WordCardContainer } from './letterMatchGameStyle';
+
 
 const LetterMatchGame: React.FC = () => {
   return (
     <LetterMatchGameContainer>
-      <Typography variant="h1" gutterBottom>
+      <Typography variant="h5" gutterBottom>
         LetterMatchGame page
       </Typography>
+      <WordCardContainer>
+        <WordCard />
+        <WordCard />
+      </WordCardContainer>
     </LetterMatchGameContainer>
   );
 };
