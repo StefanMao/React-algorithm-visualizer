@@ -1,7 +1,7 @@
 import React from 'react';
 import { Typography } from '@mui/material';
 
-import WordCard from "@/common/wordCard/WordCard";
+import LetterMatchWordCard from "@/components/LetterMatchGame/LetterMatchWordCard";
 
 import { LetterMatchGameContainer, WordCardContainer } from './letterMatchGameStyle';
 
@@ -13,8 +13,8 @@ const LetterMatchGame: React.FC = () => {
         LetterMatchGame page
       </Typography>
       <WordCardContainer>
-        <WordCard />
-        <WordCard />
+        <LetterMatchWordCard />
+        <LetterMatchWordCard />
       </WordCardContainer>
     </LetterMatchGameContainer>
   );
