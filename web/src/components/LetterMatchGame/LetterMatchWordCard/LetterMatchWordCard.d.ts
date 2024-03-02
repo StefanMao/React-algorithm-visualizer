@@ -13,5 +13,11 @@ export interface ILetterMatchWordCardStates {
 }
 
 export interface ILetterMatchWordCardProps {
-
+  optionSide: WordCardSide;
+  options: any;
 }
+export interface IWordCardNodeProps {
+  optionSide: WordCardSide;
+}
+
+type WordCardSide = "left" | "right";
