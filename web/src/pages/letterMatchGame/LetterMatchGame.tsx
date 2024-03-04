@@ -18,12 +18,12 @@ const LetterMatchGame: React.FC = () => {
       <WordCardContainer>
         <Box>
           {leftOptions.map((option, index) => (
-            <LetterMatchWordCard key={`left_${index}`} optionSide="left" options={option} />
+            <LetterMatchWordCard key={`left_${index}`} optionSide="left" option={option} />
           ))}
         </Box>
         <Box>
           {rightOptions.map((option, index) => (
-            <LetterMatchWordCard key={`right_${index}`} optionSide="right" options={option} />
+            <LetterMatchWordCard key={`right_${index}`} optionSide="right" option={option} />
           ))}
         </Box>
       </WordCardContainer>

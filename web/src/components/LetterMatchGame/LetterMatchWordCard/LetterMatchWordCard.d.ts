@@ -9,12 +9,12 @@ export interface ILetterMatchWordCardAction {
 }
 
 export interface ILetterMatchWordCardStates {
-  boundaryRef: React.RefObject<any>;
+  boundaryRef: React.RefObject<SVGSVGElement>;
 }
 
 export interface ILetterMatchWordCardProps {
   optionSide: WordCardSide;
-  options: any;
+  option?: null | string;
 }
 export interface IWordCardNodeProps {
   optionSide: WordCardSide;
