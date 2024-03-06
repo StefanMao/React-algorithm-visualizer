@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+
+import { useAppSelector, useAppDispatch } from '@/store/hook';
+import { setLeftSelected, selectedWordCard } from '@/store/letterMatchGameStore/letterMatchGameSlice';
 import type { IWordCardInfo } from '@/components/letterMatchGame/letterMatchWordCard/types/letterMatchWordCard';
 import type { ILetterMatchGameHook } from './types/letterMatchGame';
 
@@ -29,10 +32,13 @@ const initializeRightCardsInfo = (maxCardCount: number): IWordCardInfo[] => {
 };
 
 export const useLetterMatchGameHook = (): ILetterMatchGameHook => {
-  const [leftCardsInfo, setLeftCardsInfo] = useState<IWordCardInfo[]>(() =>
+  const selectedCard = useAppSelector(selectedWordCard);
+  const dispatch = useAppDispatch();
+  
+  const [leftCardsInfo] = useState<IWordCardInfo[]>(() =>
     initializeLeftCardsInfo(MAX_QUESTIONS),
   );
-  const [rightCardsInfo, setRightCardsInfo] = useState<IWordCardInfo[]>(() =>
+  const [rightCardsInfo] = useState<IWordCardInfo[]>(() =>
     initializeRightCardsInfo(MAX_QUESTIONS),
   );
 
@@ -40,8 +46,12 @@ export const useLetterMatchGameHook = (): ILetterMatchGameHook => {
     _: React.MouseEvent<HTMLButtonElement>,
     cardInfo: IWordCardInfo,
   ): void => {
-    console.log('handleWordCardClick', cardInfo);
+    dispatch(setLeftSelected(cardInfo));
   };
+
+  useEffect(() => {
+    console.log('selected', selectedCard);
+  }, [selectedCard]);
 
   const states = { leftCardsInfo, rightCardsInfo };
   const actions = { handleWordCardClick };
