@@ -2,9 +2,9 @@ import { useRef, useState, useEffect } from 'react';
 import { Selection, select } from 'd3';
 
 import { d3DrawCircle } from '@/utils/d3/d3';
-import type { ILetterMatchWordCardUseHook } from './LetterMatchWordCard.d';
+import type { ILetterMatchWordCardHook } from './types/letterMatchWordCard';
 
-export const useLetterMatchWordCardHook = (): ILetterMatchWordCardUseHook => {
+export const useLetterMatchWordCardHook = (): ILetterMatchWordCardHook => {
   const [hovered, setHovered] = useState(false);
   const boundaryRef = useRef<SVGSVGElement>(null!);
 

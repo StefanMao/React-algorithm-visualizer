@@ -1,14 +1,14 @@
 import React from "react";
 import { CardContent, Typography } from "@mui/material";
-import WordCard from "@/common/wordCard/WordCard";
+import WordCard from "@/common/ui/wordCard/WordCard";
 
-import { LetterMatchWordCardContainer, WordCardNode } from "./LetterMatchWordCardStyle";
-import type { ILetterMatchWordCardProps } from "./LetterMatchWordCard.d";
-import { useLetterMatchWordCardHook } from "./LetterMatchWordCardHooks";
+import { LetterMatchWordCardContainer, WordCardNode, WordCardActionArea } from "./letterMatchWordCardStyle";
+import type { ILetterMatchWordCardProps } from "./types/letterMatchWordCard";
+import { useLetterMatchWordCardHook } from "./letterMatchWordCardHooks";
 
 
 const LetterMatchWordCard: React.FC<ILetterMatchWordCardProps> = (props) => {
-  const { optionSide } = props;
+  const { cardInfo, handleWordCardClick } = props;
   const { states, actions } = useLetterMatchWordCardHook();
   const { boundaryRef } = states;
   const { handleMouseEnter, handleMouseLeave } = actions;
@@ -19,13 +19,15 @@ const LetterMatchWordCard: React.FC<ILetterMatchWordCardProps> = (props) => {
       onMouseLeave={handleMouseLeave}
     >
       <WordCard>
-        <CardContent>
-          <Typography variant="subtitle1">
-            泰文單字
-          </Typography>
-        </CardContent>
+        <WordCardActionArea onClick={(e) => handleWordCardClick(e, cardInfo)}>
+          <CardContent>
+            <Typography variant="subtitle1">
+              {cardInfo.details.showText}
+            </Typography>
+          </CardContent>
+        </WordCardActionArea>
       </WordCard>
-      <WordCardNode ref={boundaryRef} optionSide={optionSide} />
+      <WordCardNode ref={boundaryRef} optionSide={cardInfo.side} />
     </LetterMatchWordCardContainer>
   );
 };
