@@ -21,13 +21,13 @@ export interface IWordCardNodeProps {
 }
 
 export interface IWordCardInfo {
+  id: string; // 字卡id
   status: WordCardMatchStatus;
   side: WordCardPairSide;
   details: IWordCardDetails;
 }
 
 export interface IWordCardDetails {
-  id: string; // 字卡id
   thaiWordId: string; // 單字id
   showText: string;
 }
