@@ -1,13 +1,18 @@
 import styled from '@emotion/styled';
 import { Box, CardActionArea } from '@mui/material';
-import { IWordCardNodeProps } from './types/letterMatchWordCard';
+import { IWordCardNodeProps, ILetterMatchWordCardContainerStyleProps } from './types/letterMatchWordCard';
 
-export const LetterMatchWordCardContainer = styled(Box)`
+export const LetterMatchWordCardContainer = styled(Box, {
+  shouldForwardProp: (propName) => propName !== 'cardInfo',
+}) <ILetterMatchWordCardContainerStyleProps>`
   height: 70px;
   position: relative;
   border: 2px dashed transparent;
   transition: border-color 0.3s ease;
-
+  border-color: ${(props) => {
+    const { status } = props.cardInfo;
+    return status === 'selected' ? '#9d9d9d' : status === 'matched' ? '#02C874' : 'transparent';
+  }};
   &:hover {
     border-color: #9d9d9d;
   }

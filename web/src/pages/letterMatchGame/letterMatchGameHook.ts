@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-
 import { useAppSelector, useAppDispatch } from '@/store/hook';
 import {
   setLeftSelected,
@@ -59,8 +58,7 @@ export const useLetterMatchGameHook = (): ILetterMatchGameHook => {
     if (status === 'matched') return;
 
     const cardsInfoToUpdate = side === 'left' ? leftCardsInfo : rightCardsInfo;
-    // 更新卡片狀態
-    const updatedCardsInfo = updateCardStatus(cardsInfoToUpdate, id);
+    const updatedCardsInfo = updateSideCardStatus(cardsInfoToUpdate, id);
     const dispatchData = { ...cardInfo, status: 'selected' as WordCardMatchStatus };
 
     if (side === 'left') {
@@ -72,12 +70,21 @@ export const useLetterMatchGameHook = (): ILetterMatchGameHook => {
     }
   };
 
-  const updateCardStatus = (cardsInfo: IWordCardInfo[], clickedCardId: string): IWordCardInfo[] => {
+  /**
+   * 每一次點擊字卡，都需要更新同一側其他未點擊的字卡狀態
+   * @param cardsInfo
+   * @param clickedCardId
+   * @returns
+   */
+  const updateSideCardStatus = (
+    cardsInfo: IWordCardInfo[],
+    clickedCardId: string,
+  ): IWordCardInfo[] => {
     return cardsInfo.map((card) => {
       if (card.id === clickedCardId) {
         // 如果點擊的卡片是要更新的卡片，則將其狀態設置為 'selected'
         return { ...card, status: 'selected' };
-      } else if (card.status === 'selected') {
+      } else if (card.status !== 'matched') {
         return { ...card, status: 'pending' };
       }
       return card;
@@ -88,33 +95,39 @@ export const useLetterMatchGameHook = (): ILetterMatchGameHook => {
     if (!selectedCard.left || !selectedCard.right) return;
 
     const { left, right } = selectedCard;
-    if (left.details.thaiWordId === right.details.thaiWordId) {
-      // 如果相等，將兩側卡片的狀態設置為 matched
-      const updatedLeftCardsInfo = leftCardsInfo.map((card) =>
-        card.id === left.id ? { ...card, status: 'matched' as WordCardMatchStatus } : card,
-      );
+    const isCorrectAnswer = left.details.thaiWordId === right.details.thaiWordId;
 
-      const updatedRightCardsInfo = rightCardsInfo.map((card) => (
-        card.id === right.id ? { ...card, status: 'matched' as WordCardMatchStatus } : card
-      ));
+    const updateCardInfo = (cardsInfo: IWordCardInfo[], targetId: string): IWordCardInfo[] =>
+      cardsInfo.map((card) => ({
+        ...card,
+        status:
+          card.status === 'matched'
+            ? card.status
+            : card.id === targetId
+            ? isCorrectAnswer
+              ? 'matched'
+              : 'pending'
+            : card.status,
+      }));
 
-      setLeftCardsInfo(updatedLeftCardsInfo);
-      setRightCardsInfo(updatedRightCardsInfo);
+    // 更新左側卡片的狀態
+    const updatedLeftCardsInfo = updateCardInfo(leftCardsInfo, left.id);
 
-      // 重置 selectedCard
-      dispatch(setRightSelected(null));
-      dispatch(setLeftSelected(null));
-    }
+    // 更新右側卡片的狀態
+    const updatedRightCardsInfo = updateCardInfo(rightCardsInfo, right.id);
+
+    // 更新狀態
+    setLeftCardsInfo(updatedLeftCardsInfo);
+    setRightCardsInfo(updatedRightCardsInfo);
+
+    // 重置 selectedCard
+    dispatch(setRightSelected(null));
+    dispatch(setLeftSelected(null));
   };
 
   useEffect(() => {
     checkConnectMatchingCard();
-  }, [selectedCard, leftCardsInfo, rightCardsInfo]);
-
-  useEffect(() => {
-    console.log('leftCardsInfo', leftCardsInfo);
-    console.log('rightCardsInfo', rightCardsInfo);
-  }, [leftCardsInfo, rightCardsInfo]);
+  }, [selectedCard]);
 
   const states = { leftCardsInfo, rightCardsInfo };
   const actions = { handleWordCardClick };

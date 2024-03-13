@@ -16,6 +16,11 @@ export interface ILetterMatchWordCardProps {
   cardInfo: IWordCardInfo;
   handleWordCardClick: (e: React.MouseEvent<HTMLButtonElement>, cardInfo: IWordCardInfo) => void;
 }
+
+export interface ILetterMatchWordCardContainerStyleProps {
+  cardInfo: IWordCardInfo;
+}
+
 export interface IWordCardNodeProps {
   optionSide: WordCardPairSide;
 }

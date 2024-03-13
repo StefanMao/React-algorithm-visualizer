@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Typography, Box } from '@mui/material';
 
 import LetterMatchWordCard from "@/components/letterMatchGame/letterMatchWordCard";
@@ -10,6 +10,19 @@ const LetterMatchGame: React.FC = () => {
   const { leftCardsInfo, rightCardsInfo } = states;
   const { handleWordCardClick } = actions;
 
+  // 使用 useMemo 確保即使數據不變，也不會重新創建 LetterMatchWordCard
+  const leftWordCards = useMemo(() => (
+    leftCardsInfo.map((info, index) => (
+      <LetterMatchWordCard key={`left-${index}`} cardInfo={info} handleWordCardClick={handleWordCardClick} />
+    ))
+  ), [leftCardsInfo]);
+
+  const rightWordCards = useMemo(() => (
+    rightCardsInfo.map((info, index) => (
+      <LetterMatchWordCard key={`right-${index}`} cardInfo={info} handleWordCardClick={handleWordCardClick} />
+    ))
+  ), [rightCardsInfo]);
+
   return (
     <LetterMatchGameContainer>
       <Typography variant="h5" gutterBottom>
@@ -17,14 +30,10 @@ const LetterMatchGame: React.FC = () => {
       </Typography>
       <WordCardContainer>
         <Box>
-          {leftCardsInfo.map((info, index) => (
-            <LetterMatchWordCard key={`left-${index}`} cardInfo={info} handleWordCardClick={handleWordCardClick} />
-          ))}
+          {leftWordCards}
         </Box>
         <Box>
-          {rightCardsInfo.map((info, index) => (
-            <LetterMatchWordCard key={`right-${index}`} cardInfo={info} handleWordCardClick={handleWordCardClick} />
-          ))}
+          {rightWordCards}
         </Box>
       </WordCardContainer>
     </LetterMatchGameContainer>

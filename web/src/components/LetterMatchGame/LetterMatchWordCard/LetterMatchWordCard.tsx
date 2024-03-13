@@ -17,6 +17,7 @@ const LetterMatchWordCard: React.FC<ILetterMatchWordCardProps> = (props) => {
     <LetterMatchWordCardContainer
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
+      cardInfo={cardInfo}
     >
       <WordCard>
         <WordCardActionArea onClick={(e) => handleWordCardClick(e, cardInfo)}>
