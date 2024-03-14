@@ -9,7 +9,7 @@ import { useLetterMatchWordCardHook } from "./letterMatchWordCardHooks";
 
 const LetterMatchWordCard: React.FC<ILetterMatchWordCardProps> = (props) => {
   const { cardInfo, handleWordCardClick } = props;
-  const { states, actions } = useLetterMatchWordCardHook();
+  const { states, actions } = useLetterMatchWordCardHook(props);
   const { boundaryRef } = states;
   const { handleMouseEnter, handleMouseLeave } = actions;
 

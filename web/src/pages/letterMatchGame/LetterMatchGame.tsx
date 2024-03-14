@@ -1,9 +1,9 @@
 import React, { useMemo } from 'react';
-import { Typography, Box } from '@mui/material';
+import { Typography } from '@mui/material';
 
 import LetterMatchWordCard from "@/components/letterMatchGame/letterMatchWordCard";
 import { useLetterMatchGameHook } from "./letterMatchGameHook";
-import { LetterMatchGameContainer, WordCardContainer } from './letterMatchGameStyle';
+import { LetterMatchGameContainer, WordCardContainer, SpaceBetweenSection } from './letterMatchGameStyle';
 
 const LetterMatchGame: React.FC = () => {
   const { states, actions } = useLetterMatchGameHook();
@@ -15,13 +15,13 @@ const LetterMatchGame: React.FC = () => {
     leftCardsInfo.map((info, index) => (
       <LetterMatchWordCard key={`left-${index}`} cardInfo={info} handleWordCardClick={handleWordCardClick} />
     ))
-  ), [leftCardsInfo]);
+  ), [leftCardsInfo, handleWordCardClick]);
 
   const rightWordCards = useMemo(() => (
     rightCardsInfo.map((info, index) => (
       <LetterMatchWordCard key={`right-${index}`} cardInfo={info} handleWordCardClick={handleWordCardClick} />
     ))
-  ), [rightCardsInfo]);
+  ), [rightCardsInfo, handleWordCardClick]);
 
   return (
     <LetterMatchGameContainer>
@@ -29,12 +29,12 @@ const LetterMatchGame: React.FC = () => {
         LetterMatchGame page
       </Typography>
       <WordCardContainer>
-        <Box>
+        <SpaceBetweenSection>
           {leftWordCards}
-        </Box>
-        <Box>
+        </SpaceBetweenSection>
+        <SpaceBetweenSection>
           {rightWordCards}
-        </Box>
+        </SpaceBetweenSection>
       </WordCardContainer>
     </LetterMatchGameContainer>
   );

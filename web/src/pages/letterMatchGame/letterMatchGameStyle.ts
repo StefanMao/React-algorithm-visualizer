@@ -17,3 +17,9 @@ export const WordCardContainer = styled(Box)`
   height: 500px;
   padding: 20px;
 `;
+
+export const SpaceBetweenSection = styled(Box)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+`;

@@ -9,6 +9,10 @@ export const LetterMatchWordCardContainer = styled(Box, {
   position: relative;
   border: 2px dashed transparent;
   transition: border-color 0.3s ease;
+  border: ${(props) => {
+    const { status } = props.cardInfo;
+    return status === 'matched' ? '2px solid #02C874': '';
+  }};
   border-color: ${(props) => {
     const { status } = props.cardInfo;
     return status === 'selected' ? '#9d9d9d' : status === 'matched' ? '#02C874' : 'transparent';

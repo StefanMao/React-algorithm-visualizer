@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAppSelector, useAppDispatch } from '@/store/hook';
 import {
   setLeftSelected,
@@ -91,7 +91,7 @@ export const useLetterMatchGameHook = (): ILetterMatchGameHook => {
     });
   };
 
-  const checkConnectMatchingCard = (): void => {
+  const checkConnectMatchingCard = useCallback((): void => {
     if (!selectedCard.left || !selectedCard.right) return;
 
     const { left, right } = selectedCard;
@@ -123,11 +123,11 @@ export const useLetterMatchGameHook = (): ILetterMatchGameHook => {
     // 重置 selectedCard
     dispatch(setRightSelected(null));
     dispatch(setLeftSelected(null));
-  };
+  }, [dispatch, leftCardsInfo, rightCardsInfo, selectedCard]);
 
   useEffect(() => {
     checkConnectMatchingCard();
-  }, [selectedCard]);
+  }, [selectedCard, checkConnectMatchingCard]);
 
   const states = { leftCardsInfo, rightCardsInfo };
   const actions = { handleWordCardClick };
